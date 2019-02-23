@@ -9,10 +9,9 @@ from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 
 def reDraw(tolS,tolN):
-    reDraw.f.clf()        # clear the figure
+    reDraw.f.clf()       
     reDraw.a = reDraw.f.add_subplot(111)
     if chkBtnVar.get():
-        #if tolN < 2: tolN = 2
         myTree=reg_tree.createTree(reDraw.rawDat, reg_tree.modelLeaf,\
                                    reg_tree.modelErr, (tolS,tolN))
         yHat = reg_tree.createForeCast(myTree, reDraw.testDat, \
@@ -20,8 +19,8 @@ def reDraw(tolS,tolN):
     else:
         myTree=reg_tree.createTree(reDraw.rawDat, ops=(tolS,tolN))
         yHat = reg_tree.createForeCast(myTree, reDraw.testDat)
-    reDraw.a.scatter(array(reDraw.rawDat[:,0]), array(reDraw.rawDat[:,1]), s=5) #use scatter for data set
-    reDraw.a.plot(reDraw.testDat, yHat, linewidth=2.0) #use plot for yHat
+    reDraw.a.scatter(array(reDraw.rawDat[:,0]), array(reDraw.rawDat[:,1]), s=5) 
+    reDraw.a.plot(reDraw.testDat, yHat, linewidth=2.0)
     reDraw.canvas.show()
     
 def getInputs():
@@ -40,12 +39,12 @@ def getInputs():
     return tolN,tolS
 
 def drawNewTree():
-    tolN,tolS = getInputs()#get values from Entry boxes
+    tolN,tolS = getInputs()
     reDraw(tolS,tolN)
     
 root=Tk()
 
-reDraw.f = Figure(figsize=(5,4), dpi=100) #create canvas
+reDraw.f = Figure(figsize=(5,4), dpi=100)
 reDraw.canvas = FigureCanvasTkAgg(reDraw.f, master=root)
 reDraw.canvas.show()
 reDraw.canvas.get_tk_widget().grid(row=0, columnspan=3)
